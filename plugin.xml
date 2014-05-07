@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+xmlns:android="http://schemas.android.com/apk/res/android"
+           id="fm.radiant.cordova.utils.volume"
+      version="0.1.0">
+
+    <name>Volume Utils</name>
+    <description>Control volume on Android</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,media,volume</keywords>
+
+    <js-module src="www/VolumeUtils.js" name="VolumeUtils">
+        <clobbers target="VolumeUtils" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="VolumeUtils">
+                <param name="android-package" value="fm.radiant.cordova.utils.volume.VolumeUtils"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+        </config-file>
+
+        <source-file src="src/android/VolumeUtils.java" target-dir="src/fm/radiant/cordova/utils/volume" />
+
+    </platform>
+</plugin>
