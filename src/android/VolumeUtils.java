@@ -35,8 +35,7 @@ public class VolumeUtils extends CordovaPlugin {
       }
     }else if("getVolume".equals("getVolume")){
         int currVol = getCurrentVolume();
-        String strVol= String.valueOf(currVol);
-        callbackContext.success(strVol);
+        callbackContext.success((int)currVol);
         Log.d(TAG, "Volume: " + currVol);
     }else{
       actionState = false;
