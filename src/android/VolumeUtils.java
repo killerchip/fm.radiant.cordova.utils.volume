@@ -18,11 +18,17 @@ public class VolumeUtils extends CordovaPlugin {
   private Context context;
   private AudioManager manager;
 
+  public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+    super.initialize(cordova, webView);
+
+    context = cordova.getActivity().getApplicationContext();
+    manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+  }
+
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
     boolean actionState = true;
-    context = cordova.getActivity().getApplicationContext();
-    manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+
     if ("setVolume".equals(action)) {
 
       try {
