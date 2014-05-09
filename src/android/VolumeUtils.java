@@ -10,7 +10,11 @@ import org.json.JSONException;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.util.Log;
+import android.content.ComponentName;
+
+import fm.radiant.cordova.utils.volume.RemoteControlReceiver;
 
 public class VolumeUtils extends CordovaPlugin {
   private static final String TAG = "VolumeUtils";
@@ -18,11 +22,35 @@ public class VolumeUtils extends CordovaPlugin {
   private Context context;
   private AudioManager manager;
 
+  public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+    super.initialize(cordova, webView);
+
+    context = cordova.getActivity().getApplicationContext();
+    manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+
+    manager.registerMediaButtonEventReceiver(new ComponentName("fm.radiant.cordova.utils.volume", RemoteControlReceiver.class.getName()));
+//
+//
+    //OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
+    //  public void onAudioFocusChange(int focusChange) {
+    //    if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT){
+    //      // Pause playback
+    //    } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+    //      // Resume playback
+    //       manager.registerMediaButtonEventReceiver(new ComponentName(context.getPackageName(), RemoteControlReceiver.class.getName()));
+    //    } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+    //      // Stop playback
+    //       manager.unregisterMediaButtonEventReceiver(new ComponentName(context.getPackageName(), RemoteControlReceiver.class.getName()));
+    //    }
+    //  }
+    //};
+  }
+
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
     boolean actionState = true;
-    context = cordova.getActivity().getApplicationContext();
-    manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+    manager.registerMediaButtonEventReceiver(new ComponentName(context.getPackageName(), RemoteControlReceiver.class));
+
     if ("setVolume".equals(action)) {
 
       try {

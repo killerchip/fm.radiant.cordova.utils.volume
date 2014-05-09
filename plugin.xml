@@ -25,7 +25,16 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
         </config-file>
 
-        <source-file src="src/android/VolumeUtils.java" target-dir="src/fm/radiant/cordova/utils/volume" />
 
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <receiver android:name="fm.radiant.cordova.utils.volume.RemoteControlReceiver">
+                <intent-filter>
+                    <action android:name="android.intent.action.MEDIA_BUTTON" />
+                </intent-filter>
+            </receiver>
+        </config-file>
+
+        <source-file src="src/android/RemoteControlReceiver.java" target-dir="src/fm/radiant/cordova/utils/volume" />
+        <source-file src="src/android/VolumeUtils.java" target-dir="src/fm/radiant/cordova/utils/volume" />
     </platform>
 </plugin>
