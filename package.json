@@ -1,0 +1,19 @@
+{
+  "name": "fm.radiant.cordova.utils.volume",
+  "version": "1.0.0",
+  "description": "This plugin provides the ability to control volume on Android.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmbuthia/fm.radiant.cordova.utils.volume.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fmbuthia/fm.radiant.cordova.utils.volume/issues"
+  },
+  "homepage": "https://github.com/fmbuthia/fm.radiant.cordova.utils.volume#readme"
+}
